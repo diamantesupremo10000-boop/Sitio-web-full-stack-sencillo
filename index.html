@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamLite - Tu Video Tube</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <span class="material-icons play-icon">play_circle_filled</span>
+            <h1>StreamLite</h1>
+        </div>
+        <button id="uploadBtn" class="btn-primary">
+            <span class="material-icons">file_upload</span> Subir
+        </button>
+    </nav>
+
+    <section id="playerSection" class="hidden">
+        <div class="player-container">
+            <video id="mainVideo" controls autoplay></video>
+            <h2 id="videoTitle"></h2>
+            <p id="videoViews" class="meta-text"></p>
+            <button id="closePlayer" class="btn-text">Cerrar Reproductor</button>
+        </div>
+    </section>
+
+    <main class="container">
+        <h2>Tendencias</h2>
+        <div id="videoGrid" class="grid">
+            </div>
+    </main>
+
+    <div id="uploadModal" class="modal hidden">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <h2>Subir Video</h2>
+            <form id="uploadForm">
+                <input type="text" name="title" placeholder="Título del video" required>
+                <input type="url" name="thumbnail" placeholder="URL de la Miniatura (imagen)" required>
+                <input type="url" name="url" placeholder="URL del Video (.mp4)" required>
+                <button type="submit" class="btn-primary">Publicar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
