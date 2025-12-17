@@ -12,5 +12,5 @@ CREATE TABLE videos (
 -- Datos semilla (para que no esté vacío al inicio)
 INSERT INTO videos (title, thumbnail, url, views) VALUES 
 ('Paisaje Relajante 4K', 'IMG-20251216-WA0001.jpg', 'grok_video_2025-12-17-08-25-34.mp4', 12050),
-('Tutorial de Python en 5 min', 'IMG-20251216-WA0006.jpg', 'https://www.w3schools.com/html/movie.mp4', 5340),
+('Tutorial de Python en 5 min', 'IMG-20251216-WA0006.jpg', 'grok_video_2025-12-17-08-26-19.mp4', 5340),
 ('Increible Atardecer', 'IMG-20251216-WA0008.jpg', 'https://www.w3schools.com/html/mov_bbb.mp4', 8900);
