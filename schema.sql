@@ -12,5 +12,5 @@ CREATE TABLE videos (
 -- Datos semilla (para que no esté vacío al inicio)
 INSERT INTO videos (title, thumbnail, url, views) VALUES 
 ('Paisaje Relajante 4K', 'https://github.com/diamantesupremo10000-boop/Sitio-web-full-stack-sencillo/blob/main/IMG-20251216-WA0001.jpg', 'https://github.com/diamantesupremo10000-boop/Sitio-web-full-stack-sencillo/blob/main/grok_video_2025-12-17-08-25-34.mp4', 12050),
-('Tutorial de Python en 5 min', 'https://github.com/diamantesupremo10000-boop/Sitio-web-full-stack-sencillo/blob/main/IMG-20251216-WA0006.jpg', 'grok_video_2025-12-17-08-26-19.mp4', 5340),
+('Tutorial de Python en 5 min', 'https://github.com/diamantesupremo10000-boop/Sitio-web-full-stack-sencillo/blob/main/IMG-20251216-WA0006.jpg', 'https://github.com/diamantesupremo10000-boop/Sitio-web-full-stack-sencillo/blob/main/grok_video_2025-12-17-08-26-19.mp4', 5340),
 ('Increible Atardecer', 'https://github.com/diamantesupremo10000-boop/Sitio-web-full-stack-sencillo/blob/main/IMG-20251216-WA0008.jpg', 'grok_video_2025-12-17-08-27-11.mp4', 8900);
