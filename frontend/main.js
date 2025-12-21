@@ -1,20 +1,27 @@
+const API_URL = window.ENV?.API_URL || 'http://localhost:5000';
+
 document.addEventListener('DOMContentLoaded', () => {
     const grid = document.getElementById('videoGrid');
     const playerSection = document.getElementById('playerSection');
     const mainVideo = document.getElementById('mainVideo');
     const uploadModal = document.getElementById('uploadModal');
 
-    // 1. Cargar Videos desde la API
     async function loadVideos() {
         try {
-            const res = await fetch('/api/videos');
+            const res = await fetch(`${API_URL}/api/videos`);
             const videos = await res.json();
             renderGrid(videos);
-        } catch (error) { console.error("Error cargando videos:", error); }
+        } catch (error) {
+            console.error("Error cargando videos:", error);
+            grid.innerHTML = '<p style="color: #aaa; text-align: center; padding: 2rem;">Error al cargar videos</p>';
+        }
     }
 
-    // 2. Renderizar Grid
     function renderGrid(videos) {
+        if (!videos || videos.length === 0) {
+            grid.innerHTML = '<p style="color: #aaa; text-align: center; padding: 2rem;">No hay videos disponibles</p>';
+            return;
+        }
         grid.innerHTML = videos.map(video => `
             <div class="card" onclick="playVideo('${video.url}', '${video.title}', ${video.views})">
                 <img src="${video.thumbnail}" class="thumbnail" alt="${video.title}" loading="lazy">
@@ -26,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
-    // 3. Reproducir Video (Función global)
     window.playVideo = (url, title, views) => {
         playerSection.classList.remove('hidden');
         mainVideo.src = url;
@@ -35,24 +41,31 @@ document.addEventListener('DOMContentLoaded', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    // 4. Manejo de Subida
     document.getElementById('uploadForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData.entries());
 
-        await fetch('/api/videos', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(data)
-        });
-        
-        uploadModal.classList.add('hidden');
-        e.target.reset();
-        loadVideos(); // Recargar grid
+        try {
+            const response = await fetch(`${API_URL}/api/videos`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                uploadModal.classList.add('hidden');
+                e.target.reset();
+                loadVideos();
+            } else {
+                alert('Error al subir el video');
+            }
+        } catch (error) {
+            console.error("Error subiendo video:", error);
+            alert('Error al subir el video');
+        }
     });
 
-    // UI Interactiva
     document.getElementById('closePlayer').onclick = () => {
         playerSection.classList.add('hidden');
         mainVideo.pause();
@@ -60,5 +73,5 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('uploadBtn').onclick = () => uploadModal.classList.remove('hidden');
     document.getElementById('closeModal').onclick = () => uploadModal.classList.add('hidden');
 
-    loadVideos(); // Iniciar
+    loadVideos();
 });
